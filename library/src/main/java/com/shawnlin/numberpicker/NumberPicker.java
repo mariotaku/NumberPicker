@@ -10,12 +10,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -40,6 +34,13 @@ import java.lang.annotation.Retention;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
