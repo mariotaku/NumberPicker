@@ -1685,6 +1685,26 @@ public class NumberPicker extends LinearLayout {
     }
 
     /**
+     * Changes the current value by {@param offset} which is increment or
+     * decrement based on the passes argument.
+     */
+    public void changeValueBy(int offset) {
+        if (offset == 0) return;
+        mSelectedText.setVisibility(View.INVISIBLE);
+        if (!moveToFinalScrollerPosition(mFlingScroller)) {
+            moveToFinalScrollerPosition(mAdjustScroller);
+        }
+        if (isHorizontalMode()) {
+            mPreviousScrollerX = 0;
+            mFlingScroller.startScroll(0, 0, -mSelectorElementSize * offset, 0, SNAP_SCROLL_DURATION);
+        } else {
+            mPreviousScrollerY = 0;
+            mFlingScroller.startScroll(0, 0, 0, -mSelectorElementSize * offset, SNAP_SCROLL_DURATION);
+        }
+        invalidate();
+    }
+
+    /**
      * Resets the selector indices and clear the cached string representation of
      * these indices.
      */
@@ -1737,26 +1757,7 @@ public class NumberPicker extends LinearLayout {
      * @param increment True to increment, false to decrement.
      */
     private void changeValueByOne(boolean increment) {
-        mSelectedText.setVisibility(View.INVISIBLE);
-        if (!moveToFinalScrollerPosition(mFlingScroller)) {
-            moveToFinalScrollerPosition(mAdjustScroller);
-        }
-        if (isHorizontalMode()) {
-            mPreviousScrollerX = 0;
-            if (increment) {
-                mFlingScroller.startScroll(0, 0, -mSelectorElementSize, 0, SNAP_SCROLL_DURATION);
-            } else {
-                mFlingScroller.startScroll(0, 0, mSelectorElementSize, 0, SNAP_SCROLL_DURATION);
-            }
-        } else {
-            mPreviousScrollerY = 0;
-            if (increment) {
-                mFlingScroller.startScroll(0, 0, 0, -mSelectorElementSize, SNAP_SCROLL_DURATION);
-            } else {
-                mFlingScroller.startScroll(0, 0, 0, mSelectorElementSize, SNAP_SCROLL_DURATION);
-            }
-        }
-        invalidate();
+        changeValueBy(increment ? 1 : -1);
     }
 
     private void initializeSelectorWheel() {
