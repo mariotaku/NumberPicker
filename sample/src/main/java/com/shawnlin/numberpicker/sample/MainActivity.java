@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.shawnlin.numberpicker.NumberPicker;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        NumberPicker numberPicker = findViewById(R.id.number_picker);
+        final NumberPicker numberPicker = findViewById(R.id.number_picker);
 
         // Set divider color
         numberPicker.setDividerColor(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         numberPicker.setTextColorResource(R.color.dark_grey);
 
         // Set text size
-        numberPicker.setTextSize(getResources().getDimension(R.dimen.text_size));
-        numberPicker.setTextSize(R.dimen.text_size);
+        numberPicker.setTextSize(getResources().getDimension(R.dimen.text_size) * 0.75f);
+        numberPicker.setSelectedTextSize(R.dimen.text_size);
 
         // Set typeface
         numberPicker.setTypeface(Typeface.create(getString(R.string.roboto_light), Typeface.NORMAL));
@@ -90,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 Log.d(TAG, String.format(Locale.US, "oldVal: %d, newVal: %d", oldVal, newVal));
+            }
+        });
+
+        findViewById(R.id.vertical_add_more).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberPicker.changeValueBy(3);
             }
         });
     }
