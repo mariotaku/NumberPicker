@@ -1694,6 +1694,7 @@ public class NumberPicker extends LinearLayout {
         if (!moveToFinalScrollerPosition(mFlingScroller)) {
             moveToFinalScrollerPosition(mAdjustScroller);
         }
+        onScrollStateChange(OnScrollListener.SCROLL_STATE_FLING);
         if (isHorizontalMode()) {
             mPreviousScrollerX = 0;
             mFlingScroller.startScroll(0, 0, -mSelectorElementSize * offset, 0, SNAP_SCROLL_DURATION);
